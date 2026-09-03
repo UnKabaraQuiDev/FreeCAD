@@ -56,6 +56,11 @@
           <string comment="Transform the combined result of the features">Feature result</string>
          </property>
         </item>
+        <item>
+         <property name="text">
+          <string comment="Recompute the features using the other transforms (slow!)">Recompute features</string>
+         </property>
+        </item>
        </widget>
       </item>
      </layout>

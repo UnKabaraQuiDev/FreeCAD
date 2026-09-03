@@ -519,6 +519,7 @@ App::DocumentObjectExecReturn* FeatureExtrude::buildExtrusion(ExtrudeOptions opt
             );
         }
         sketchshape.move(invObjLoc);
+        sketchshape.makeElementTransform(sketchshape, offsetTransform);
 
         const char* startType = StartType.getValueAsString();
         const double startOffset = std::strcmp(startType, "Profile plane") == 0 ? 0.0

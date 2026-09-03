@@ -61,6 +61,8 @@ public:
     App::PropertyLength Offset2;
     App::PropertyLinkSub ReferenceAxis;
 
+    gp_Trsf offsetTransform;
+
     static App::PropertyQuantityConstraint::Constraints signedLengthConstraint;
     static double maxAngle;
     static App::PropertyAngle::Constraints floatAngle;

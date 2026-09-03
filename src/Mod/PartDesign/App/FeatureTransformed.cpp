@@ -50,6 +50,7 @@
 #include "FeaturePolarPattern.h"
 #include "FeatureSketchBased.h"
 #include "FeatureTransformed.h"
+#include "FeaturePad.h"
 
 using namespace PartDesign;
 
@@ -59,7 +60,7 @@ extern bool getPDRefineModelParameter();
 
 PROPERTY_SOURCE(PartDesign::Transformed, PartDesign::FeatureRefine)
 
-std::array<char const*, 4> transformModeEnums = {"Features", "Whole Body", "Feature Result", nullptr};
+std::array<char const*, 5> transformModeEnums = {"Features", "Whole Body", "Feature Result", "Recomputed Features", nullptr};
 
 Transformed::Transformed()
 {
@@ -421,23 +422,25 @@ App::DocumentObjectExecReturn* Transformed::execute()
 
     App::DocumentObjectExecReturn* result = nullptr;
     switch (mode) {
-        case Mode::Features: {
+        case Mode::Features:
             result = executeFeatures(transformations, supportShape, originals);
             break;
-        }
 
-        case Mode::FeatureResult: {
+        case Mode::FeatureResult:
             result = executeFeatureResult(transformations, supportShape, originals);
             break;
-        }
 
-        case Mode::WholeShape: {
+        case Mode::WholeShape:
             result = executeWholeBody(transformations, supportShape, originals);
             break;
-        }
+
+        case Mode::RecomputeFeatures:
+            result = executeRecomputedFeatures(transformations, supportShape, originals);
+            break;
 
         default:
             result = new App::DocumentObjectExecReturn("Invalid mode.");
+            break;
     }
 
     if (result) {
@@ -729,6 +732,90 @@ App::DocumentObjectExecReturn* Transformed::executeWholeBody(
         )
             .c_str()
     );
+    return nullptr;
+}
+
+App::DocumentObjectExecReturn* Transformed::executeRecomputedFeatures(
+    const std::vector<gp_Trsf>& transformations,
+    Part::TopoShape& supportShape,
+    const std::vector<DocumentObject*>& originals
+) {
+    const gp_Trsf supportInv =
+        supportShape.getShape().Location().Transformation().Inverted();
+
+    for (auto original : originals) {
+        auto feature = freecad_cast<PartDesign::FeatureAddSub*>(original);
+        if (!feature) {
+            return new App::DocumentObjectExecReturn(QT_TRANSLATE_NOOP(
+                "Exception",
+                "Only additive and subtractive features can be transformed"
+                ));
+        }
+
+        // const Base::Placement originalPlacement = feature->Placement.getValue();
+
+        for (const auto& transformation : transformations) {
+            if (Base::Sequencer().wasCanceled()) {
+                return new App::DocumentObjectExecReturn("User aborted");
+            }
+
+            // Transform the feature relative to the support shape.
+            const gp_Trsf featureTrsf = feature->getLocation().Transformation();
+
+            const gp_Trsf trsf =
+                supportInv.Multiplied(
+                    transformation.Multiplied(featureTrsf)
+                    );
+
+            // feature->Placement.setValue(Base::Placement(mat));
+            freecad_cast<PartDesign::Pad*>(feature)->offsetTransform = trsf;
+            freecad_cast<PartDesign::Pad*>(feature)->execute();
+
+            if (Base::Sequencer().wasCanceled()) {
+                return new App::DocumentObjectExecReturn("User aborted");
+            }
+
+            Part::TopoShape addShape;
+            Part::TopoShape subShape;
+
+            feature->getAddSubShape(addShape, subShape);
+
+            if (addShape.isNull() && subShape.isNull()) {
+                return new App::DocumentObjectExecReturn(
+                    QT_TRANSLATE_NOOP(
+                        "Exception",
+                        "Shape of additive/subtractive feature is empty"
+                        )
+                    );
+            }
+
+            if (!addShape.isNull()) {
+                supportShape.makeElementFuse(
+                    {supportShape, addShape},
+                    std::format(
+                        "Fuse_add_{}",
+                        feature->getNameInDocument()
+                        ).c_str()
+                    );
+            }
+
+            if (!subShape.isNull()) {
+                supportShape.makeElementCut(
+                    {supportShape, subShape},
+                    std::format(
+                        "Cut_sub_{}",
+                        feature->getNameInDocument()
+                        ).c_str()
+                    );
+            }
+        }
+
+        // Restore the original placement before processing the next feature.
+        freecad_cast<PartDesign::Pad*>(feature)->offsetTransform = gp_Trsf();
+        //feature->recompute();
+        feature->purgeTouched();
+    }
+
     return nullptr;
 }
 

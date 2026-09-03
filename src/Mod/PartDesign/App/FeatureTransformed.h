@@ -47,7 +47,8 @@ public:
     {
         Features,
         WholeShape,
-        FeatureResult
+        FeatureResult,
+        RecomputeFeatures
     };
 
     Transformed();
@@ -143,6 +144,11 @@ private:
         const std::vector<DocumentObject*>& originals
     );
     App::DocumentObjectExecReturn* executeFeatureResult(
+        const std::vector<gp_Trsf>& transformations,
+        Part::TopoShape& supportShape,
+        const std::vector<DocumentObject*>& originals
+    );
+    App::DocumentObjectExecReturn* executeRecomputedFeatures(
         const std::vector<gp_Trsf>& transformations,
         Part::TopoShape& supportShape,
         const std::vector<DocumentObject*>& originals
