@@ -22,6 +22,7 @@
  *                                                                         *
  ***************************************************************************/
 
+#include <charconv>
 #include <BRep_Builder.hxx>
 #include <BRep_Tool.hxx>
 #include <TopExp.hxx>
@@ -30,7 +31,6 @@
 #include <TopTools_IndexedMapOfShape.hxx>
 #include <TopTools_IndexedDataMapOfShapeListOfShape.hxx>
 #include <TopExp_Explorer.hxx>
-
 
 #include <boost/algorithm/string/predicate.hpp>
 
