@@ -63,6 +63,10 @@
 #include "SketchObjectPy.h"
 #include "ExternalGeometryFacade.h"
 
+#include "SketchObjectLinearPattern.h"
+#include "SketchObjectTransformed.h"
+#include "SketchObjectPolarPattern.h"
+
 
 #undef DEBUG
 // #define DEBUG
@@ -382,9 +386,11 @@ App::DocumentObjectExecReturn* SketchObject::execute()
     return App::DocumentObject::StdReturn;
 }
 
-static bool inline checkSmallEdge(const Part::TopoShape &s) {
-    if (s.shapeType() != TopAbs_EDGE)
+bool SketchObject::checkSmallEdge(const Part::TopoShape &s)
+{
+    if (s.shapeType() != TopAbs_EDGE) {
         return false;
+    }
     BRepAdaptor_Curve adapt(TopoDS::Edge(s.getShape()));
     return GCPnts_AbscissaPoint::Length(adapt, Precision::Confusion()) <= Precision::Confusion();
 }

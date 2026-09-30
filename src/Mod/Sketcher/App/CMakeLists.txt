@@ -46,7 +46,10 @@ generate_from_py(GeometryFacade)
 generate_from_py(ExternalGeometryFacade)
 generate_from_py(Constraint)
 generate_from_py(Sketch)
-
+#generate_from_py(SketchObjectModifier)
+#generate_from_py(SketchObjectTransformed)
+#generate_from_py(SketchObjectLinearPattern)
+#generate_from_py(SketchObjectPolarPattern)
 
 SET(Properties_SRCS
     PropertyConstraintList.cpp
@@ -77,6 +80,14 @@ SET(Features_SRCS
     Analyse.h
     PythonConverter.cpp
     PythonConverter.h
+    SketchObjectModifier.h
+    SketchObjectModifier.cpp
+    SketchObjectTransformed.cpp
+    SketchObjectTransformed.h
+    SketchObjectLinearPattern.cpp
+    SketchObjectLinearPattern.h
+    SketchObjectPolarPattern.cpp
+    SketchObjectPolarPattern.h
 )
 SOURCE_GROUP("Features" FILES ${Features_SRCS})
 

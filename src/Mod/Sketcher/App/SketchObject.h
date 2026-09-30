@@ -685,6 +685,8 @@ public:
     /// generates a warning message about malformed constraints and appends it to the given message
     static void appendMalformedConstraintsMsg(const std::vector<int>& malformed, std::string& msg);
 
+    static bool inline checkSmallEdge(const Part::TopoShape& s);
+
     double calculateAngleViaPoint(int geoId1, int geoId2, double px, double py);
     bool isPointOnCurve(int geoIdCurve, double px, double py);
     double calculateConstraintError(int ConstrId);
@@ -1238,6 +1240,7 @@ private:
     class GeoHistory;
     std::unique_ptr<GeoHistory> geoHistory;
 
+protected:
     mutable std::map<std::string, std::string> internalElementMap;
 };
 
