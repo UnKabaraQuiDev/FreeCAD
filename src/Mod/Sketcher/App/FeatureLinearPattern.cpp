@@ -1,13 +1,13 @@
-#include "SketchObjectLinearPattern.h"
+#include "FeatureLinearPattern.h"
 
 #include "opencascade/Precision.hxx"
 #include "opencascade/gp_Trsf.hxx"
 
 using namespace Sketcher;
 
-PROPERTY_SOURCE(Sketcher::SketchObjectLinearPattern, Sketcher::SketchObjectTransformed)
+PROPERTY_SOURCE(Sketcher::LinearPattern, Sketcher::Transformed)
 
-SketchObjectLinearPattern::SketchObjectLinearPattern()
+LinearPattern::LinearPattern()
 {
     ADD_PROPERTY_TYPE(
         Direction,
@@ -19,16 +19,16 @@ SketchObjectLinearPattern::SketchObjectLinearPattern()
     ADD_PROPERTY_TYPE(Length, (10.0), "Linear Pattern", App::Prop_None, "Total length of the pattern");
     ADD_PROPERTY_TYPE(Occurrences, (2), "Linear Pattern", App::Prop_None, "Number of occurrences");
 
-    SketchObjectLinearPattern::getClassTypeId();
+    LinearPattern::getClassTypeId();
 }
 
-short SketchObjectLinearPattern::mustExecute() const
+short LinearPattern::mustExecute() const
 {
     return inherited::mustExecute() || Direction.isTouched() || Length.isTouched()
         || Occurrences.isTouched();
 }
 
-std::list<gp_Trsf> SketchObjectLinearPattern::getTransformations() const
+std::list<gp_Trsf> LinearPattern::getTransformations() const
 {
     std::list<gp_Trsf> result;
 

@@ -80,14 +80,18 @@ SET(Features_SRCS
     Analyse.h
     PythonConverter.cpp
     PythonConverter.h
-    SketchObjectModifier.h
-    SketchObjectModifier.cpp
-    SketchObjectTransformed.cpp
-    SketchObjectTransformed.h
-    SketchObjectLinearPattern.cpp
-    SketchObjectLinearPattern.h
-    SketchObjectPolarPattern.cpp
-    SketchObjectPolarPattern.h
+    Feature.h
+    Feature.cpp
+    FeatureTransformed.cpp
+    FeatureTransformed.h
+    FeatureLinearPattern.cpp
+    FeatureLinearPattern.h
+    FeaturePolarPattern.cpp
+    FeaturePolarPattern.h
+    FeatureMirrored.cpp
+    FeatureMirrored.h
+    FeatureProject.cpp
+    FeatureProject.h
 )
 SOURCE_GROUP("Features" FILES ${Features_SRCS})
 

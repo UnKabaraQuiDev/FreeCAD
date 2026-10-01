@@ -1,4 +1,4 @@
-#include "SketchObjectTransformed.h"
+#include "FeatureTransformed.h"
 
 #include <Base/Exception.h>
 #include <Base/Tools.h>
@@ -6,17 +6,17 @@
 
 using namespace Sketcher;
 
-PROPERTY_SOURCE_ABSTRACT(Sketcher::SketchObjectTransformed, Sketcher::SketchObjectModifier)
+PROPERTY_SOURCE_ABSTRACT(Sketcher::Transformed, Sketcher::Feature)
 
-SketchObjectTransformed::SketchObjectTransformed()
+Transformed::Transformed()
 {}
 
-short SketchObjectTransformed::mustExecute() const
+short Transformed::mustExecute() const
 {
     return inherited::mustExecute() || Originals.isTouched() || SuppressedIndices.isTouched();
 }
 
-App::DocumentObjectExecReturn* SketchObjectTransformed::executeModifier()
+App::DocumentObjectExecReturn* Transformed::executeModifier()
 {
     auto* baseObject = Base.getValue();
 
@@ -53,7 +53,7 @@ App::DocumentObjectExecReturn* SketchObjectTransformed::executeModifier()
     return DocumentObject::StdReturn;
 }
 
-bool SketchObjectTransformed::isTransformationSuppressed(int index) const
+bool Transformed::isTransformationSuppressed(int index) const
 {
     if (index < 0) {
         return false;
@@ -68,7 +68,7 @@ bool SketchObjectTransformed::isTransformationSuppressed(int index) const
     return suppressed[index];
 }
 
-void SketchObjectTransformed::setTransformationSuppressed(int index, bool suppressed)
+void Transformed::setTransformationSuppressed(int index, bool suppressed)
 {
     if (index < 0) {
         return;
@@ -87,7 +87,7 @@ void SketchObjectTransformed::setTransformationSuppressed(int index, bool suppre
     SuppressedIndices.setValues(values);
 }
 
-const std::list<gp_Trsf> SketchObjectTransformed::getFilteredTransformations(
+const std::list<gp_Trsf> Transformed::getFilteredTransformations(
     const std::vector<App::DocumentObject*> originals
 )
 {
@@ -108,7 +108,7 @@ const std::list<gp_Trsf> SketchObjectTransformed::getFilteredTransformations(
     return result;
 }
 
-Part::Geometry* SketchObjectTransformed::transformGeometry(
+Part::Geometry* Transformed::transformGeometry(
     const Part::Geometry* geometry,
     const gp_Trsf& transformation
 )

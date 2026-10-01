@@ -44,9 +44,9 @@
 #include "SketchPy.h"
 #include "SolverGeometryExtension.h"
 #include "Measure.h"
-#include "SketchObjectLinearPattern.h"
-#include "SketchObjectPolarPattern.h"
-#include "SketchObjectTransformed.h"
+#include "FeatureLinearPattern.h"
+#include "FeaturePolarPattern.h"
+#include "FeatureTransformed.h"
 
 namespace Sketcher
 {
@@ -101,10 +101,10 @@ PyMOD_INIT_FUNC(Sketcher)
     Sketcher::SketchObjectSF::init();
     Sketcher::SketchObject::init();
     Sketcher::SketchObjectPython::init();
-    Sketcher::SketchObjectModifier::init();
-    Sketcher::SketchObjectTransformed::init();
-    Sketcher::SketchObjectLinearPattern::init();
-    Sketcher::SketchObjectPolarPattern::init();
+    Sketcher::Feature::init();
+    Sketcher::Transformed::init();
+    Sketcher::LinearPattern::init();
+    Sketcher::PolarPattern::init();
     Sketcher::Sketch::init();
     Sketcher::Constraint::init();
     Sketcher::PropertyConstraintList::init();

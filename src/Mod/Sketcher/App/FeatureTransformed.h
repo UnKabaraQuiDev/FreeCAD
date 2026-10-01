@@ -6,20 +6,20 @@
 #include <TopoDS_Shape.hxx>
 #include <gp_Trsf.hxx>
 
-#include "SketchObjectModifier.h"
+#include "Feature.h"
 #include "App/PropertyContainer.h"
 #include "App/PropertyUnits.h"
 
 namespace Sketcher
 {
 
-class SketcherExport SketchObjectTransformed: public SketchObjectModifier
+class SketcherExport Transformed: public Feature
 {
-    typedef SketchObjectModifier inherited;
-    PROPERTY_HEADER_WITH_OVERRIDE(Sketcher::SketchObjectTransformed);
+    typedef Feature inherited;
+    PROPERTY_HEADER_WITH_OVERRIDE(Sketcher::Transformed);
 
 public:
-    SketchObjectTransformed();
+    Transformed();
 
     App::PropertyLinkList Originals;
     App::PropertyIntegerList SuppressedIndices;

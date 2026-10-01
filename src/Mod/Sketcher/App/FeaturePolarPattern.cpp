@@ -1,12 +1,12 @@
-#include "SketchObjectPolarPattern.h"
+#include "FeaturePolarPattern.h"
 
 #include <gp_Ax1.hxx>
 
 using namespace Sketcher;
 
-PROPERTY_SOURCE(Sketcher::SketchObjectPolarPattern, Sketcher::SketchObjectTransformed)
+PROPERTY_SOURCE(Sketcher::PolarPattern, Sketcher::Transformed)
 
-SketchObjectPolarPattern::SketchObjectPolarPattern()
+PolarPattern::PolarPattern()
 {
     ADD_PROPERTY_TYPE(
         Center,
@@ -19,13 +19,13 @@ SketchObjectPolarPattern::SketchObjectPolarPattern()
     ADD_PROPERTY_TYPE(Occurrences, (2), "Polar Pattern", App::Prop_None, "Number of occurrences");
 }
 
-short SketchObjectPolarPattern::mustExecute() const
+short PolarPattern::mustExecute() const
 {
     return inherited::mustExecute() || Center.isTouched() || Angle.isTouched()
         || Occurrences.isTouched();
 }
 
-std::list<gp_Trsf> SketchObjectPolarPattern::getTransformations() const
+std::list<gp_Trsf> PolarPattern::getTransformations() const
 {
     std::list<gp_Trsf> result;
 
