@@ -38,7 +38,7 @@ using namespace Attacher;
 // ============================================================================
 
 
-PROPERTY_SOURCE(PartDesign::CoordinateSystem, Part::Datum)
+PROPERTY_SOURCE(PartDesign::CoordinateSystem, Part::LocalCoordinateSystem)
 
 CoordinateSystem::CoordinateSystem()
 {

@@ -38,7 +38,7 @@ using namespace Attacher;
 
 const char* Plane::ResizeModeEnums[] = {"Automatic", "Manual", nullptr};
 
-PROPERTY_SOURCE(PartDesign::Plane, Part::Datum)
+PROPERTY_SOURCE(PartDesign::Plane, Part::DatumPlane)
 
 Plane::Plane()
 {

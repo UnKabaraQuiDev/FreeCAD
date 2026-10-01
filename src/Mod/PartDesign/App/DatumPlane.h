@@ -27,13 +27,14 @@
 #pragma once
 
 #include <Mod/Part/App/DatumFeature.h>
+#include <Mod/Part/App/Datums.h>
 #include <Mod/PartDesign/PartDesignGlobal.h>
 #include <App/PropertyUnits.h>
 
 namespace PartDesign
 {
 
-class PartDesignExport Plane: public Part::Datum
+class PartDesignExport Plane: public Part::Datum, public Part::DatumPlane
 {
     PROPERTY_HEADER_WITH_OVERRIDE(PartDesign::Plane);
 

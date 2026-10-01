@@ -38,7 +38,7 @@ using namespace Attacher;
 
 const char* Line::ResizeModeEnums[] = {"Automatic", "Manual", nullptr};
 
-PROPERTY_SOURCE(PartDesign::Line, Part::Datum)
+PROPERTY_SOURCE(PartDesign::Line, Part::DatumLine)
 
 Line::Line()
 {

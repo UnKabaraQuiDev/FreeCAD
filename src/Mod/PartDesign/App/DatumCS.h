@@ -26,12 +26,13 @@
 #pragma once
 
 #include <Mod/Part/App/DatumFeature.h>
+#include <Mod/Part/App/Datums.h>
 #include <Mod/PartDesign/PartDesignGlobal.h>
 
 namespace PartDesign
 {
 
-class PartDesignExport CoordinateSystem: public Part::Datum
+class PartDesignExport CoordinateSystem: public Part::Datum, public Part::LocalCoordinateSystem
 {
     PROPERTY_HEADER_WITH_OVERRIDE(PartDesign::CoordinateSystem);
 

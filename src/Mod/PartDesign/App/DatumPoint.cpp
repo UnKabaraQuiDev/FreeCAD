@@ -35,7 +35,7 @@ using namespace Attacher;
 
 // ============================================================================
 
-PROPERTY_SOURCE(PartDesign::Point, Part::Datum)
+PROPERTY_SOURCE(PartDesign::Point, Part::DatumPoint)
 
 Point::Point()
 {

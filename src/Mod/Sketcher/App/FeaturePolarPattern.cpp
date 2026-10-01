@@ -25,7 +25,7 @@ short PolarPattern::mustExecute() const
         || Occurrences.isTouched();
 }
 
-std::list<gp_Trsf> PolarPattern::getTransformations() const
+const std::list<gp_Trsf> PolarPattern::getTransformations() const
 {
     std::list<gp_Trsf> result;
 

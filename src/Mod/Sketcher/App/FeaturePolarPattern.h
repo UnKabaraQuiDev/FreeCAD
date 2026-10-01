@@ -18,7 +18,7 @@ public:
     App::PropertyInteger Occurrences;
 
     short mustExecute() const override;
-    std::list<gp_Trsf> getTransformations() const override;
+    const std::list<gp_Trsf> getTransformations() const override;
 };
 
 }  // namespace Sketcher

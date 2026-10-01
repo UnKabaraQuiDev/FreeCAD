@@ -46,6 +46,8 @@ public:
 
 protected:
     virtual App::DocumentObjectExecReturn* executeModifier();
+
+    gp_Pnt getPointFromFace(const TopoDS_Face& f) const;
 };
 
 }  // namespace Sketcher

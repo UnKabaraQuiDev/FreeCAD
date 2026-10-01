@@ -1,8 +1,10 @@
-#include "FeatureProject.h"
+#include "FeatureProjected.h"
 
 using namespace Sketcher;
 
-Project::Project()
+PROPERTY_SOURCE(Sketcher::Projected, Sketcher::Feature)
+
+Projected::Projected()
 {
     ADD_PROPERTY_TYPE(
         ProjectPlane,
@@ -13,12 +15,12 @@ Project::Project()
     );
 }
 
-short Project::mustExecute() const
+short Projected::mustExecute() const
 {
     return inherited::mustExecute() || ProjectPlane.isTouched();
 }
 
-App::DocumentObjectExecReturn* Project::executeModifier()
+App::DocumentObjectExecReturn* Projected::executeModifier()
 {
-
+    return nullptr;
 }

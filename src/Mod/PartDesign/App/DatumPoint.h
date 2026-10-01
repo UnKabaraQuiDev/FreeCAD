@@ -27,12 +27,13 @@
 #pragma once
 
 #include <Mod/Part/App/DatumFeature.h>
+#include <Mod/Part/App/Datums.h>
 #include <Mod/PartDesign/PartDesignGlobal.h>
 
 namespace PartDesign
 {
 
-class PartDesignExport Point: public Part::Datum
+class PartDesignExport Point: public Part::Datum, public Part::DatumPoint
 {
     PROPERTY_HEADER_WITH_OVERRIDE(PartDesign::Point);
 
@@ -47,7 +48,7 @@ public:
 
     Base::Vector3d getPoint();
 
-    using Superclass = Part::Datum;
+    using Superclass = Part::DatumPoint;
 
 protected:
     void onChanged(const App::Property* prop) override;

@@ -32,10 +32,9 @@ public:
      * The returned transformations are applied to every geometry
      * element of Base.
      */
-    virtual std::list<gp_Trsf> getTransformations() const
+    virtual const std::list<gp_Trsf> getTransformations() const
     {
         return std::list<gp_Trsf>();
-        ;
     }
 
     /// Whether the first transformation is already represented by the original support.

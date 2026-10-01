@@ -90,8 +90,8 @@ SET(Features_SRCS
     FeaturePolarPattern.h
     FeatureMirrored.cpp
     FeatureMirrored.h
-    FeatureProject.cpp
-    FeatureProject.h
+    FeatureProjected.cpp
+    FeatureProjected.h
 )
 SOURCE_GROUP("Features" FILES ${Features_SRCS})
 

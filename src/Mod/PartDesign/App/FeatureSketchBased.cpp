@@ -67,12 +67,13 @@
 #include <Base/Tools.h>
 #include <Mod/Part/App/FaceMakerCheese.h>
 #include <Mod/Part/App/Tools.h>
+#include <Mod/Part/App/DatumFeature.h>
+#include <Mod/Part/App/Geometry.h>
 
 #include "Body.h"
 #include "FeatureSketchBased.h"
 #include "DatumLine.h"
 #include "DatumPlane.h"
-#include "Mod/Part/App/Geometry.h"
 
 
 FC_LOG_LEVEL_INIT("PartDesign", true, true);

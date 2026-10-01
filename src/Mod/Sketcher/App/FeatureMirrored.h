@@ -7,17 +7,21 @@
 namespace Sketcher
 {
 
-class Mirrored : public Transformed
+class Mirrored: public Transformed
 {
     typedef Transformed inherited;
     PROPERTY_HEADER_WITH_OVERRIDE(Sketcher::Mirrored);
+
 public:
     Mirrored();
 
     App::PropertyLinkSub MirrorPlane;
 
     short mustExecute() const override;
-    std::list<gp_Trsf> getTransformations() const override;
+    const std::list<gp_Trsf> getTransformations() const override;
+
+protected:
+    std::list<gp_Trsf> createTransformations(gp_Pnt& axbase, gp_Dir& axdir) const;
 };
 
 }  // namespace Sketcher

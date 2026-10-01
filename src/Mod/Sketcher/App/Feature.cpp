@@ -1,10 +1,22 @@
 #include "Feature.h"
 
 #include <App/Document.h>
-
 #include <Mod/Part/App/TopoShapeOpCode.h>
-#include "opencascade/TopAbs_ShapeEnum.hxx"
-#include "opencascade/TopoDS.hxx"
+
+#include <BRepAdaptor_Surface.hxx>
+#include <GeomAbs_SurfaceType.hxx>
+#include <gp_Ax2.hxx>
+#include <gp_Dir.hxx>
+#include <gp_Pnt.hxx>
+#include <gp_Trsf.hxx>
+#include <TopoDS.hxx>
+#include <TopoDS_Face.hxx>
+#include <TopoDS_Shape.hxx>
+#include <TopLoc_Location.hxx>
+#include <TopAbs_ShapeEnum.hxx>
+#include <BRep_Tool.hxx>
+#include <TopAbs_ShapeEnum.hxx>
+#include <TopExp_Explorer.hxx>
 
 using namespace Sketcher;
 FC_LOG_LEVEL_INIT("SketchObjectModifier", true, true)
@@ -142,4 +154,20 @@ void Feature::buildShape2()
     InternalShape.setValue(buildInternals(result.located(TopLoc_Location())));
 
     Shape.setValue(result);
+}
+
+gp_Pnt Feature::getPointFromFace(const TopoDS_Face& f) const
+{
+    if (!f.Infinite()) {
+        TopExp_Explorer exp;
+        exp.Init(f, TopAbs_VERTEX);
+        if (exp.More()) {
+            return BRep_Tool::Pnt(TopoDS::Vertex(exp.Current()));
+        }
+        // Else try the other method
+    }
+
+    // TODO: Other method, e.g. intersect X,Y,Z axis with the (unlimited?) face?
+    // Or get a "corner" point if the face is limited?
+    throw Base::NotImplementedError("getPointFromFace(): Not implemented yet for this case");
 }

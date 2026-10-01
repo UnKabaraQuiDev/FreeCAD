@@ -27,13 +27,14 @@
 #pragma once
 
 #include <Mod/Part/App/DatumFeature.h>
+#include <Mod/Part/App/Datums.h>
 #include <Mod/PartDesign/PartDesignGlobal.h>
 #include <App/PropertyUnits.h>
 
 namespace PartDesign
 {
 
-class PartDesignExport Line: public Part::Datum
+class PartDesignExport Line: public Part::Datum, public Part::DatumLine
 {
     PROPERTY_HEADER_WITH_OVERRIDE(PartDesign::Line);
 
@@ -50,7 +51,7 @@ public:
         return "PartDesignGui::ViewProviderDatumLine";
     }
 
-    Base::Vector3d getDirection() const;
+    Base::Vector3d getDirection() const override;
 
 private:
     static const char* ResizeModeEnums[];

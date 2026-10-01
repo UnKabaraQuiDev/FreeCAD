@@ -28,7 +28,7 @@ short LinearPattern::mustExecute() const
         || Occurrences.isTouched();
 }
 
-std::list<gp_Trsf> LinearPattern::getTransformations() const
+const std::list<gp_Trsf> LinearPattern::getTransformations() const
 {
     std::list<gp_Trsf> result;
 

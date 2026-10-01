@@ -51,10 +51,10 @@ public:
     ~DatumElement() override;
 
     /// Finds the origin object this plane belongs to
-    App::LocalCoordinateSystem* getLCS() const;
-    Base::Vector3d getBasePoint() const;
-    Base::Vector3d getDirection() const;
-    Base::Vector3d getBaseDirection() const;
+    virtual LocalCoordinateSystem* getLCS() const;
+    virtual Base::Vector3d getBasePoint() const;
+    virtual Base::Vector3d getDirection() const;
+    virtual Base::Vector3d getBaseDirection() const;
 
     bool getCameraAlignmentDirection(Base::Vector3d& directionZ, Base::Vector3d& directionX, const char* subname) const override;
 

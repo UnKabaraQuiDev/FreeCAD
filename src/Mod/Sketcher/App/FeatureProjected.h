@@ -6,12 +6,13 @@
 namespace Sketcher
 {
 
-class Project : public Feature
+class Projected: public Feature
 {
     typedef Feature inherited;
-    PROPERTY_HEADER_WITH_OVERRIDE(Sketcher::Project);
+    PROPERTY_HEADER_WITH_OVERRIDE(Sketcher::Projected);
+
 public:
-    Project();
+    Projected();
 
     App::PropertyLinkSub ProjectPlane;
 
