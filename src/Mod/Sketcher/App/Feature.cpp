@@ -1,4 +1,4 @@
-#include "SketchObjectModifier.h"
+#include "Feature.h"
 
 #include <App/Document.h>
 
@@ -9,9 +9,9 @@
 using namespace Sketcher;
 FC_LOG_LEVEL_INIT("SketchObjectModifier", true, true)
 
-PROPERTY_SOURCE_ABSTRACT(Sketcher::SketchObjectModifier, Sketcher::SketchObject)
+PROPERTY_SOURCE_ABSTRACT(Sketcher::Feature, Sketcher::SketchObject)
 
-SketchObjectModifier::SketchObjectModifier()
+Feature::Feature()
 {
     ADD_PROPERTY_TYPE(Base, (nullptr), "Modifier", App::Prop_None, "Base sketch");
 
@@ -26,15 +26,15 @@ SketchObjectModifier::SketchObjectModifier()
     _InternalFaceVersion.setStatusValue(App::Prop_ReadOnly | App::Prop_Hidden);
 }
 
-SketchObjectModifier::~SketchObjectModifier()
+Feature::~Feature()
 {}
 
-short SketchObjectModifier::mustExecute() const
+short Feature::mustExecute() const
 {
     return inherited::mustExecute() || Base.isTouched();
 }
 
-App::DocumentObjectExecReturn* SketchObjectModifier::execute()
+App::DocumentObjectExecReturn* Feature::execute()
 {
     try {
         // Position the sketch according to its attachment/support.
@@ -55,12 +55,12 @@ App::DocumentObjectExecReturn* SketchObjectModifier::execute()
     }
 }
 
-App::DocumentObjectExecReturn* SketchObjectModifier::executeModifier()
+App::DocumentObjectExecReturn* Feature::executeModifier()
 {
     return App::DocumentObject::StdReturn;
 }
 
-void SketchObjectModifier::buildShape2()
+void Feature::buildShape2()
 {
     std::vector<Part::TopoShape> shapes;
     std::vector<Part::TopoShape> vertices;

@@ -1,17 +1,17 @@
 #pragma once
 
-#include "SketchObjectTransformed.h"
+#include "FeatureTransformed.h"
 
 namespace Sketcher
 {
 
-class SketcherExport SketchObjectLinearPattern: public SketchObjectTransformed
+class SketcherExport LinearPattern: public Transformed
 {
-    typedef SketchObjectTransformed inherited;
-    PROPERTY_HEADER_WITH_OVERRIDE(Sketcher::SketchObjectLinearPattern);
+    typedef Transformed inherited;
+    PROPERTY_HEADER_WITH_OVERRIDE(Sketcher::LinearPattern);
 
 public:
-    SketchObjectLinearPattern();
+    LinearPattern();
 
     App::PropertyVector Direction;
     App::PropertyDistance Length;

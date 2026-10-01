@@ -25,14 +25,14 @@ namespace Sketcher
 
 using Part::Part2DObject;
 
-class SketcherExport SketchObjectModifier: public SketchObject
+class SketcherExport Feature: public SketchObject
 {
     typedef SketchObject inherited;
-    PROPERTY_HEADER_WITH_OVERRIDE(Sketcher::SketchObjectModifier);
+    PROPERTY_HEADER_WITH_OVERRIDE(Sketcher::Feature);
 
 public:
-    SketchObjectModifier();
-    ~SketchObjectModifier() override;
+    Feature();
+    ~Feature() override;
 
     App::PropertyLink Base;
 

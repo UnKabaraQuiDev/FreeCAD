@@ -1,17 +1,17 @@
 #pragma once
 
-#include "SketchObjectTransformed.h"
+#include "FeatureTransformed.h"
 
 namespace Sketcher
 {
 
-class SketcherExport SketchObjectPolarPattern: public SketchObjectTransformed
+class SketcherExport PolarPattern: public Transformed
 {
-    typedef SketchObjectTransformed inherited;
-    PROPERTY_HEADER_WITH_OVERRIDE(Sketcher::SketchObjectPolarPattern);
+    typedef Transformed inherited;
+    PROPERTY_HEADER_WITH_OVERRIDE(Sketcher::PolarPattern);
 
 public:
-    SketchObjectPolarPattern();
+    PolarPattern();
 
     App::PropertyVector Center;
     App::PropertyAngle Angle;

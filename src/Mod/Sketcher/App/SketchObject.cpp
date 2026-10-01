@@ -63,10 +63,6 @@
 #include "SketchObjectPy.h"
 #include "ExternalGeometryFacade.h"
 
-#include "SketchObjectLinearPattern.h"
-#include "SketchObjectTransformed.h"
-#include "SketchObjectPolarPattern.h"
-
 
 #undef DEBUG
 // #define DEBUG
