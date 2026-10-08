@@ -5,7 +5,7 @@
 #include "FeatureMirrored.h"
 
 #include "App/Datums.h"
-#include "Mod/PartDesign/App/DatumPlane.h"
+// #include "Mod/PartDesign/App/DatumPlane.h"
 #include "opencascade/TopLoc_Location.hxx"
 #include "opencascade/gp_Dir.hxx"
 #include "opencascade/gp_Pnt.hxx"
@@ -41,14 +41,15 @@ std::list<gp_Trsf> Mirrored::getTransformations() const
     gp_Pnt axbase;
     gp_Dir axdir;
 
-    if (auto plane = dynamic_cast<PartDesign::Plane*>(refObject)) {
+    /*if (auto plane = dynamic_cast<PartDesign::Plane*>(refObject)) {
         Base::Vector3d base = plane->getBasePoint();
         Base::Vector3d dir = plane->getNormal();
 
         axbase = gp_Pnt(base.x, base.y, base.z);
         axdir = gp_Dir(dir.x, dir.y, dir.z);
     }
-    else if (auto plane = dynamic_cast<App::Plane*>(refObject)) {
+    else*/
+    if (auto plane = dynamic_cast<App::Plane*>(refObject)) {
         Base::Vector3d base = plane->getBasePoint();
         Base::Vector3d dir = plane->getDirection();
 

@@ -2,6 +2,8 @@
 
 using namespace Sketcher;
 
+PROPERTY_SOURCE(Sketcher::Project, Sketcher::Feature)
+
 Project::Project()
 {
     ADD_PROPERTY_TYPE(
@@ -19,6 +21,4 @@ short Project::mustExecute() const
 }
 
 App::DocumentObjectExecReturn* Project::executeModifier()
-{
-
-}
+{}

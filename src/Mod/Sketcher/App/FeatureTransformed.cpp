@@ -9,41 +9,45 @@ using namespace Sketcher;
 PROPERTY_SOURCE_ABSTRACT(Sketcher::Transformed, Sketcher::Feature)
 
 Transformed::Transformed()
-{}
+{
+    Base.setStatusValue(App::Prop_Hidden);
+}
 
 short Transformed::mustExecute() const
 {
-    return inherited::mustExecute() || Originals.isTouched() || SuppressedIndices.isTouched();
+    return inherited::mustExecute() || Group.isTouched() || SuppressedIndices.isTouched();
 }
 
 App::DocumentObjectExecReturn* Transformed::executeModifier()
 {
-    auto* baseObject = Base.getValue();
+    const auto objects = getObjects();
 
-    if (!baseObject) {
-        return new App::DocumentObjectExecReturn("No base sketch specified.");
+    if (objects.empty()) {
+        return new App::DocumentObjectExecReturn("No base sketches specified.");
     }
-
-    auto* baseSketch = freecad_cast<SketchObject*>(baseObject);
-
-    if (!baseSketch) {
-        return new App::DocumentObjectExecReturn("Base must be a SketchObject.");
-    }
-
-    const auto transformations = getTransformations();
 
     std::vector<Part::Geometry*> result;
 
-    for (const auto* geometry : baseSketch->Geometry.getValues()) {
-        if (!geometry) {
-            continue;
+    const auto transformations = getTransformations();
+
+    for (const auto* object : objects) {
+        auto* sketch = freecad_cast<SketchObject*>(object);
+
+        if (!sketch) {
+            return new App::DocumentObjectExecReturn("All children must be SketchObjects.");
         }
 
-        for (const auto& transformation : transformations) {
-            auto* transformed = transformGeometry(geometry, transformation);
+        for (const auto* geometry : sketch->Geometry.getValues()) {
+            if (!geometry) {
+                continue;
+            }
 
-            if (transformed) {
-                result.push_back(transformed);
+            for (const auto& transformation : transformations) {
+                auto* transformed = transformGeometry(geometry, transformation);
+
+                if (transformed) {
+                    result.push_back(transformed);
+                }
             }
         }
     }

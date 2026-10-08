@@ -2608,6 +2608,41 @@ bool CmdSketcherTranslate::isActive()
     return isCommandNeedingGeometryActive(getActiveGuiDocument());
 }
 
+// Add feature: Mirror
+
+DEF_STD_CMD_A(CmdSketcherFeatureMirror)
+
+CmdSketcherFeatureMirror::CmdSketcherFeatureMirror()
+    : Command("Sketcher_FeatureMirror")
+{
+    sAppModule = "Sketcher";
+    sGroup = "Sketcher";
+    sMenuText = QT_TR_NOOP("Mirror sketch");
+    sToolTipText = QT_TR_NOOP("Mirrors the sketch along one of it's axis or an external reference.");
+    sStatusTip = sToolTipText;
+    sPixmap = sWhatsThis = "Sketcher_FeatureMirror";
+    // sAccel = "W";
+    eType = ForEdit;
+}
+
+void CmdSketcherFeatureMirror::activated(int iMsg)
+{
+    Q_UNUSED(iMsg);
+    std::vector<int> listOfGeoIds = getListOfSelectedGeoIds(true);
+
+    if (!listOfGeoIds.empty()) {
+        ActivateHandler(getActiveGuiDocument(), std::make_unique<DrawSketchHandlerTranslate>(listOfGeoIds));
+    }
+    getSelection().clearSelection();
+}
+
+bool CmdSketcherFeatureMirror::isActive()
+{
+    return isCommandNeedingGeometryActive(getActiveGuiDocument());
+}
+
+// OTHER ======================================================================================
+
 void CreateSketcherCommandsConstraintAccel()
 {
     Gui::CommandManager& rcCmdMgr = Gui::Application::Instance->commandManager();

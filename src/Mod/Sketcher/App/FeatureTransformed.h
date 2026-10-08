@@ -7,13 +7,15 @@
 #include <gp_Trsf.hxx>
 
 #include "Feature.h"
+#include "App/GeoFeatureGroupExtension.h"
+#include "App/GroupExtension.h"
 #include "App/PropertyContainer.h"
 #include "App/PropertyUnits.h"
 
 namespace Sketcher
 {
 
-class SketcherExport Transformed: public Feature
+class SketcherExport Transformed: public Feature, public App::GeoFeatureGroupExtension
 {
     typedef Feature inherited;
     PROPERTY_HEADER_WITH_OVERRIDE(Sketcher::Transformed);
@@ -21,7 +23,7 @@ class SketcherExport Transformed: public Feature
 public:
     Transformed();
 
-    App::PropertyLinkList Originals;
+    //    App::PropertyLinkList Originals;
     App::PropertyIntegerList SuppressedIndices;
 
     short mustExecute() const override;
